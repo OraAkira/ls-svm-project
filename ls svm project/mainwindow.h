@@ -64,6 +64,12 @@ private slots:
 
     void on_checkBox_12_clicked(bool checked);
 
+    void on_checkBox_13_clicked(bool checked);
+
+    void on_checkBox_14_clicked(bool checked);
+
+    void on_checkBox_15_clicked(bool checked);
+
 private:
     Ui::MainWindow *ui;
 

@@ -24,7 +24,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -783,7 +783,7 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>100</y>
+        <y>90</y>
         <width>251</width>
         <height>20</height>
        </rect>
@@ -826,9 +826,9 @@
       <property name="geometry">
        <rect>
         <x>30</x>
-        <y>130</y>
+        <y>120</y>
         <width>281</width>
-        <height>271</height>
+        <height>291</height>
        </rect>
       </property>
      </widget>
@@ -836,9 +836,9 @@
       <property name="geometry">
        <rect>
         <x>330</x>
-        <y>110</y>
+        <y>90</y>
         <width>451</width>
-        <height>291</height>
+        <height>321</height>
        </rect>
       </property>
       <property name="title">
@@ -858,7 +858,7 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>260</y>
+         <y>290</y>
          <width>101</width>
          <height>20</height>
         </rect>
@@ -870,8 +870,8 @@
       <widget class="QDoubleSpinBox" name="doubleSpinBox_12">
        <property name="geometry">
         <rect>
-         <x>370</x>
-         <y>260</y>
+         <x>360</x>
+         <y>290</y>
          <width>62</width>
          <height>22</height>
         </rect>
@@ -880,8 +880,8 @@
       <widget class="QLabel" name="label_27">
        <property name="geometry">
         <rect>
-         <x>360</x>
-         <y>260</y>
+         <x>350</x>
+         <y>290</y>
          <width>46</width>
          <height>21</height>
         </rect>
@@ -894,7 +894,7 @@
        <property name="geometry">
         <rect>
          <x>190</x>
-         <y>260</y>
+         <y>290</y>
          <width>121</width>
          <height>21</height>
         </rect>
@@ -907,7 +907,7 @@
        <property name="geometry">
         <rect>
          <x>90</x>
-         <y>260</y>
+         <y>290</y>
          <width>51</width>
          <height>22</height>
         </rect>
@@ -916,24 +916,63 @@
       <widget class="QComboBox" name="comboBox_3">
        <property name="geometry">
         <rect>
-         <x>300</x>
-         <y>260</y>
+         <x>290</x>
+         <y>290</y>
          <width>51</width>
-         <height>22</height>
+         <height>21</height>
         </rect>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_14">
+       <property name="geometry">
+        <rect>
+         <x>200</x>
+         <y>250</y>
+         <width>131</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y__Loo WCV_weighed  </string>
        </property>
       </widget>
       <widget class="QCheckBox" name="checkBox_12">
        <property name="geometry">
         <rect>
-         <x>30</x>
-         <y>260</y>
-         <width>311</width>
-         <height>21</height>
+         <x>10</x>
+         <y>250</y>
+         <width>131</width>
+         <height>41</height>
         </rect>
        </property>
        <property name="text">
-        <string>Показывать значения отклика</string>
+        <string>значения отклика</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_13">
+       <property name="geometry">
+        <rect>
+         <x>130</x>
+         <y>250</y>
+         <width>81</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y_Loo CV</string>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="checkBox_15">
+       <property name="geometry">
+        <rect>
+         <x>330</x>
+         <y>250</y>
+         <width>121</width>
+         <height>41</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Y_Loo CV_weighed</string>
        </property>
       </widget>
      </widget>
