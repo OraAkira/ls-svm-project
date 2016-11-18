@@ -9,17 +9,16 @@ double dot_product(double *vect1, double *vect2, int m)
     return d_p;
 }
 
-// конструктор для создания набора допустимых значений параметра RBF - ядра
-kernel_RBF::kernel_RBF()
+// конструктор для создания набора допустимых значений параметра RBF - ядра (сетка)
+ kernel_RBF::kernel_RBF()
 {
-	double p = 3.5;
-	for(int i = 0; i < 10; i++)
-	{ 
-		sigma_select[i] = pow(10,p);
-		p -= 0.5;
-	}
+    double step = 0.1;
+    sigma_select[0] = 0.1;
+    for(int i = 1; i < 100; i++)
+    {
+        sigma_select[i] = sigma_select[i-1] + step;
+    }
 }
-
 // функция вычисления значения для линейного ядра
 double kernel_linear::kernel_func(double *vect1, double *vect2)
 {
@@ -56,5 +55,5 @@ double realiz::kernel_func_choice(double *vect1, double *vect2)
  case 3:
  return kernel3.kernel_func(vect1, vect2);
  }
- throw 0;
+ throw(string("Неверно задана функция ядра"));
 }
