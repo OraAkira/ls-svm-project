@@ -99,16 +99,16 @@ void QGraph2d::setColorFigures(float r, float g, float b)
     color_figures[2] = b;
 }
 
-void QGraph2d::setColorLine(float r, float g, float b)
+void QGraph2d::setColorLine(int num, float r, float g, float b)
 {
-    color_line[0] = r;
-    color_line[1] = g;
-    color_line[2] = b;
+    color_line[num][0] = r;
+    color_line[num][1] = g;
+    color_line[num][2] = b;
 }
 
-void QGraph2d::setLineFunc(float(*line_func)(float x))
+void QGraph2d::setLineFunc(int num, float(*line_func)(float x))
 {
-    this->line_func = line_func;
+    this->line_func[num] = line_func;
 }
 
 void QGraph2d::setFigure(int figure_num)
@@ -133,6 +133,11 @@ QGraph2d::QGraph2d(QWidget* parent) : QGLWidget(parent)
     axis_x = trUtf8("x");
     axis_y = trUtf8("y");
     need_figures = false;
+    for(int i = 0; i < QGRAPH2D_FUNC_MAX; i++)
+    {
+        line_func[i] = NULL;
+        need_lines[i] = false;
+    }
 }
 
 void QGraph2d::timerEvent(QTimerEvent *)
@@ -186,6 +191,16 @@ void QGraph2d::setFigures(bool status)
 bool QGraph2d::figures()
 {
     return need_figures;
+}
+
+void QGraph2d::setLines(int num, bool status)
+{
+    need_lines[num] = status;
+}
+
+bool QGraph2d::lines(int num)
+{
+    return need_lines[num];
 }
 
 void QGraph2d::clear()
@@ -312,15 +327,29 @@ void QGraph2d::paintGL()
             float x_leg = 0.15f;
             float y_leg = /*1.07f*/-0.15f;
             glColor3f(0.0f,0.0f,0.0f);
-            renderText(x_leg, y_leg - 0.015, 0.001f, trUtf8("Ŷ"), font2);
+            if(need_lines[0])
+            {
+                renderText(x_leg, y_leg - 0.015, 0.001f, trUtf8("Ŷ (Loo CV)"), font2);
+                if(need_lines[1])
+                    renderText(x_leg + 0.4f, y_leg - 0.015, 0.001f, trUtf8("Ŷ (Loo RCV)"), font2);
+            }
+            else if(need_lines[1])
+                renderText(x_leg, y_leg - 0.015, 0.001f, trUtf8("Ŷ (Loo RCV)"), font2);
             // Рисуем точки графика
-            glColor3f(color_line[0], color_line[1], color_line[2]);
-            glLineWidth(WIDTH_FIGURES);
-            glBegin(GL_LINES);
-            glVertex2f(x_leg - 0.02f, y_leg);
-            glVertex2f(x_leg - 0.12f, y_leg);
-            glEnd();
-            x_leg += 0.32f;
+            for(int j = 0; j < 2; j++)
+            {
+                if(need_lines[j])
+                {
+                    glColor3f(color_line[j][0], color_line[j][1], color_line[j][2]);
+                    glLineWidth(WIDTH_FIGURES);
+                    glBegin(GL_LINES);
+                    glVertex2f(x_leg - 0.02f, y_leg);
+                    glVertex2f(x_leg - 0.12f, y_leg);
+                    glEnd();
+                    x_leg += 0.4f;//0.32f;
+                }
+            }
+            x_leg -= 0.1;
             if(need_figures)
             {
                 glColor3f(0.0f,0.0f,0.0f);
@@ -332,22 +361,27 @@ void QGraph2d::paintGL()
             }
 
 
-
-            // отрисовка графика
-            glColor3f(color_line[0], color_line[1], color_line[2]);
-            glLineWidth(WIDTH_LINES);
-            glBegin(GL_LINE_STRIP);
-            float x = min_x;
-            float dx = size_x / (float)line_points_num;
-            for(int i = 0; i <= line_points_num + 1/* && x <= max_x*/; i++)
+           for(int j = 0; j < QGRAPH2D_FUNC_MAX; j++)
             {
-                float y = line_func(x);
-                float x_loc = (x - min_x) / size_x;
-                float y_loc = (y - min_y) / size_y;
-                glVertex3f(x_loc, y_loc, 0.0001);
-                x = min_x + dx * (float)i;
+                if(need_lines[j])
+                {
+                    // отрисовка графика
+                    glColor3f(color_line[j][0], color_line[j][1], color_line[j][2]);
+                    glLineWidth(WIDTH_LINES);
+                    glBegin(GL_LINE_STRIP);
+                    float x = min_x;
+                    float dx = size_x / (float)line_points_num;
+                    for(int i = 0; i <= line_points_num + 1/* && x <= max_x*/; i++)
+                    {
+                        float y = line_func[j](x);
+                        float x_loc = (x - min_x) / size_x;
+                        float y_loc = (y - min_y) / size_y;
+                        glVertex3f(x_loc, y_loc, 0.0001 * (j + 1));
+                        x = min_x + dx * (float)i;
+                    }
+                    glEnd();
+                }
             }
-            glEnd();
         }
         mtx.unlock();
     }

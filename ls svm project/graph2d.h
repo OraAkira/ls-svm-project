@@ -11,6 +11,8 @@
 
 using namespace std;
 
+#define QGRAPH2D_FUNC_MAX 16
+
 namespace QGraph2dFigures
 {
     const int CIRCLE  = 0;
@@ -44,14 +46,16 @@ public:
     bool draw();
     void setFigures(bool status);
     bool figures();
+    void setLines(int num, bool status);
+    bool lines(int num);
     void clear();
     void setMaximumX(double max_x);
     void setMaximumY(double max_y);
     void setMinimumX(double min_x);
     void setMinimumY(double min_y);
     void setColorFigures(float r, float g, float b);
-    void setColorLine(float r, float g, float b);
-    void setLineFunc(float(*line_func)(float x));
+    void setColorLine(int num, float r, float g, float b);
+    void setLineFunc(int num, float(*line_func)(float x));
     void setFigure(int figure_num);
     void setLinePointsNum(int line_points_num);
     int linePointsNum();
@@ -66,11 +70,12 @@ private:
     int num_ticks_x, num_ticks_y;
     float diff;
     GLfloat color_figures[3];
-    GLfloat color_line[3];
-    float(*line_func)(float x);
+    GLfloat color_line[QGRAPH2D_FUNC_MAX][3];
+    float(*line_func[QGRAPH2D_FUNC_MAX])(float x);
     int figure_num;
     int line_points_num;
     bool need_figures;
+    bool need_lines[QGRAPH2D_FUNC_MAX];
 };
 
 #endif // GRAPH2D_H

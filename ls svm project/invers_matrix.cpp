@@ -12,8 +12,7 @@ bool realiz::trianglematrix1(double **A, double **X, int m)
 	for(int i = 0 ; i < m ; i++)
 	{ 
         double A_d = A[i][i];//ведущий элемент
-
-		transf1(A,X,i,m,A_d);//переставим строки местами 
+        transf1(A,X,i,m,A_d);//переставим строки местами
 
         if(fabs(A_d) < 1E-20)  return flag = false;
 
@@ -115,8 +114,8 @@ double **realiz::InversionMatrix(double **F, int n, int m)
 			else I[i][j] = 0.0;
 		}
 
-	// вызов решалки СЛАУ
-	if(!SLAU_solution_Gauss(A,I,rez,n)) throw 1;
+    // вызов решалки СЛАУ
+    if(!SLAU_solution_Gauss(A,I,rez,n)) throw(string("Обратная матрица не существует"));
 
 	// очистка памяти
 	for(int i = 0; i < n; i++)
