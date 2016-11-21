@@ -1,11 +1,11 @@
 # ls-svm-project
 v2.0 
-In developing. Software implemented the practical part of the modifications.
-Currently being finalized application interface. Added:
-
-- set of valid parameter values sigma^2 RBF-kernel replaced the generation of the grid;
+In developing. The computational part of modifications has been implemented in ties version of the software.
+Currently the development of the application interface is being finalized.
+Added:
+- set of admissible values of the RBF-kernel parameter (called sigma^2) is replaced bi the generation of a grid;
 - weighted procedure LS SVM (robust LS SVM);
-- auto-tuning procedure is the boundary of the parameter for the weighted algorithm;
-- formulated and added generic regularity criterion;
-- formulated and added to the weighted criteria loo CV;
-- graphics rendering results added procedures.
+- auto-tuning procedure for a boundary parameter of the weighted algorithm;
+- generalized regularity criterion is formulated and added;
+- weighted criterion LOO CV is formulated and added;
+- graphics visualization of results of above-mentioned procedures.
